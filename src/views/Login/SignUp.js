@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [values, setValues] = useState({
     password: "",
     showPassword: false,
@@ -39,7 +39,7 @@ const SignUp = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -113,7 +113,12 @@ const SignUp = () => {
       </Button>
       <Grid container justifyContent="flex-end">
         <Grid item>
-          <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+          <Link
+            href="#"
+            variant="body2"
+            sx={{ textDecoration: "none" }}
+            onClick={props.showLogin}
+          >
             Already have an account? Sign in
           </Link>
         </Grid>

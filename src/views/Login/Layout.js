@@ -1,8 +1,15 @@
-import { Box, CssBaseline, Grid, Paper, Typography } from "@mui/material";
+import { useState } from "react";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import Login from "./Login";
 import SignUp from "./SignUp";
 
 const Layout = () => {
+  const [showSignUp, setShowSignUp] = useState(false);
+
+  const handleSignUp = () => {
+    setShowSignUp((prevshowSignUp) => !prevshowSignUp);
+  };
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <Grid
@@ -27,26 +34,28 @@ const Layout = () => {
         elevation={6}
         square
       >
-      <Box
-      sx={{
-        my: 8,
-        mx: 4,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Typography
-        variant="h4"
-        component="h1"
-        sx={{ mt: 1, mb: 10, color: "white", textAlign: "center" }}
-      >
-        proTracker
-      </Typography>
-
-        {/* <Login /> */}
-        <SignUp />
-      </Box>
+        <Box
+          sx={{
+            my: 8,
+            mx: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h4"
+            component="h1"
+            sx={{ mt: 1, mb: 5, color: "white", textAlign: "center" }}
+          >
+            proTracker
+          </Typography>
+          {showSignUp ? (
+            <SignUp showLogin={handleSignUp} />
+          ) : (
+            <Login showSignUpPage={handleSignUp} />
+          )}
+        </Box>
       </Grid>
     </Grid>
   );

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
-const Login = () => {
+const Login = (props) => {
   const [values, setValues] = useState({
     password: "",
     showPassword: false,
@@ -85,6 +85,7 @@ const Login = () => {
       <FormControlLabel
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
+        sx={{mt: 2}}
       />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Sign In
@@ -96,7 +97,7 @@ const Login = () => {
           </Link>
         </Grid>
         <Grid item>
-          <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+          <Link href="#" variant="body2" sx={{ textDecoration: "none" }} onClick={props.showSignUpPage}>
             Don't have an account? Sign Up
           </Link>
         </Grid>
