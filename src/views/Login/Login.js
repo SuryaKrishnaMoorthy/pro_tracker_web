@@ -42,90 +42,65 @@ const Login = () => {
   };
 
   return (
-    <Box
-      sx={{
-        my: 8,
-        mx: 4,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Typography
-        variant="h4"
-        component="h1"
-        sx={{ mt: 1, color: "white", textAlign: "center" }}
+    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 10 }}>
+      <TextField
+        id="email"
+        margin="normal"
+        required
+        fullWidth
+        label="Email"
+        name="email"
+        autoComplete="email"
+        autoFocus
+        variant="standard"
+      />
+      <FormControl
+        variant="standard"
+        fullWidth
+        required
+        type="password"
+        name="password"
+        id="password"
+        autoComplete="current-password"
       >
-        proTracker
-      </Typography>
-      <Box component="form" onSubmit={handleSubmit} sx={{ mt: 10 }}>
-        <TextField
-          id="email"
-          margin="normal"
-          required
-          fullWidth
-          label="Email"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          variant="standard"
+        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+        <Input
+          id="standard-adornment-password"
+          type={values.showPassword ? "text" : "password"}
+          value={values.password}
+          onChange={handleChange("password")}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-        <FormControl
-          sx={{ mt: 3 }}
-          variant="standard"
-          fullWidth
-          required
-          type="password"
-          name="password"
-          id="password"
-          autoComplete="current-password"
-        >
-          <InputLabel htmlFor="standard-adornment-password">
-            Password
-          </InputLabel>
-          <Input
-            id="standard-adornment-password"
-            type={values.showPassword ? "text" : "password"}
-            value={values.password}
-            onChange={handleChange("password")}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-        />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Sign In
-        </Button>
-        <Grid container>
-          <Grid item xs>
-            <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
-              Forgot password?
-            </Link>
-          </Grid>
-          <Grid item>
-            <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
-              Don't have an account? Sign Up
-            </Link>
-          </Grid>
+      </FormControl>
+      <FormControlLabel
+        control={<Checkbox value="remember" color="primary" />}
+        label="Remember me"
+      />
+      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+        Sign In
+      </Button>
+      <Grid container>
+        <Grid item xs>
+          <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+            Forgot password?
+          </Link>
         </Grid>
-      </Box>
+        <Grid item>
+          <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+            Don't have an account? Sign Up
+          </Link>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
