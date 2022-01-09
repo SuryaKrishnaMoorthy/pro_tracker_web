@@ -1,14 +1,23 @@
-import { Grid, Box } from "@mui/material";
-// import Login from "./Login";
+import { CssBaseline, Grid, Paper } from "@mui/material";
+import Login from "./Login";
 
 const Layout = () => {
   return (
-    <Grid container>
-      <Grid item xs={8}>
-        <Box sx={{ bgcolor: "secondary.main", height: '100vh' }}>Left</Box>
-      </Grid>
-      <Grid item xs={4}>
-        {/* <Login /> */}
+    <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid
+        item
+        xs={false}
+        sm={4}
+        md={8}
+        sx={{
+          backgroundImage: "url(https://source.unsplash.com/random)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      <Grid sx={{bgcolor: "#ccc"}} item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
+        <Login />
       </Grid>
     </Grid>
   );
