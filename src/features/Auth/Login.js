@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Button,
   TextField,
   FormControl,
-  Typography,
   InputLabel,
   Input,
   Box,
@@ -16,14 +16,18 @@ import {
 } from "@mui/material";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 
+import { loginUser } from "./authThunks";
+
 const Login = (props) => {
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
+    email: "",
     password: "",
     showPassword: false,
   });
 
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (event) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -39,6 +43,8 @@ const Login = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const { email, password } = values;
+    dispatch(loginUser({ email, password }));
   };
 
   return (
@@ -53,13 +59,13 @@ const Login = (props) => {
         autoComplete="email"
         autoFocus
         variant="standard"
+        onChange={handleChange}
       />
       <FormControl
         variant="standard"
         fullWidth
         required
         type="password"
-        name="password"
         id="password"
         autoComplete="current-password"
       >
@@ -68,7 +74,8 @@ const Login = (props) => {
           id="standard-adornment-password"
           type={values.showPassword ? "text" : "password"}
           value={values.password}
-          onChange={handleChange("password")}
+          name="password"
+          onChange={handleChange}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -85,7 +92,7 @@ const Login = (props) => {
       <FormControlLabel
         control={<Checkbox value="remember" color="primary" />}
         label="Remember me"
-        sx={{mt: 2}}
+        sx={{ mt: 2 }}
       />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
         Sign In
@@ -97,7 +104,12 @@ const Login = (props) => {
           </Link>
         </Grid>
         <Grid item>
-          <Link href="#" variant="body2" sx={{ textDecoration: "none" }} onClick={props.showSignUpPage}>
+          <Link
+            href="#"
+            variant="body2"
+            sx={{ textDecoration: "none" }}
+            onClick={props.showSignUpPage}
+          >
             Don't have an account? Sign Up
           </Link>
         </Grid>

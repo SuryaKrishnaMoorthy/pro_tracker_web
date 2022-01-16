@@ -1,7 +1,7 @@
-import Layout from "./views/Login/Layout";
+import { Auth } from "./features";
 
 function App() {
-  return <Layout />;
+  return <Auth />;
 }
 
 export default App;

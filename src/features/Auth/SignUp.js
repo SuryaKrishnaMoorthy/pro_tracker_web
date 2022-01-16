@@ -10,21 +10,43 @@ import {
   InputLabel,
   Link,
   TextField,
-  Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { signUpUser } from "./authThunks";
 
 const SignUp = (props) => {
+  const dispatch = useDispatch();
+
   const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    zipCode: "",
+    email: "",
     password: "",
     showPassword: false,
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(values);
+    const body = {
+      email: values.email,
+      password: values.password,
+      first_name: values.firstName,
+      last_name: values.lastName,
+      zip_code: values.zipCode,
+    };
+    
+    dispatch(signUpUser(body));
+
+    //dispatch create request
+    // save token in local storage
   };
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+
+  const handleChange = (event) => {
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
 
   const handleClickShowPassword = () => {
@@ -51,6 +73,7 @@ const SignUp = (props) => {
             id="firstName"
             label="First Name"
             autoFocus
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -62,6 +85,19 @@ const SignUp = (props) => {
             label="Last Name"
             name="lastName"
             autoComplete="family-name"
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            variant="standard"
+            name="zipCode"
+            required
+            fullWidth
+            id="zipCode"
+            label="Zip Code"
+            autoFocus
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -73,6 +109,7 @@ const SignUp = (props) => {
             label="Email"
             name="email"
             autoComplete="email"
+            onChange={handleChange}
           />
         </Grid>
         <Grid item xs={12}>
@@ -81,7 +118,6 @@ const SignUp = (props) => {
             fullWidth
             required
             type="password"
-            name="password"
             id="password"
             autoComplete="current-password"
           >
@@ -92,7 +128,8 @@ const SignUp = (props) => {
               id="standard-adornment-password"
               type={values.showPassword ? "text" : "password"}
               value={values.password}
-              onChange={handleChange("password")}
+              onChange={handleChange}
+              name="password"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
