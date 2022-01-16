@@ -29,6 +29,7 @@ export const loginUser = createAsyncThunk(
         // dispatch an error, so update state
         console.log(error);
       }
+      console.log(error.response.data);
       return rejectWithValue(error.response.data);
     }
   }

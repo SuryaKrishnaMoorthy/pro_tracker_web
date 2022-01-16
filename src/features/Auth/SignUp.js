@@ -30,7 +30,6 @@ const SignUp = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(values);
     const body = {
       email: values.email,
       password: values.password,
@@ -38,8 +37,9 @@ const SignUp = (props) => {
       last_name: values.lastName,
       zip_code: values.zipCode,
     };
-    
+
     dispatch(signUpUser(body));
+    props.showSnack();
 
     //dispatch create request
     // save token in local storage
@@ -62,7 +62,7 @@ const SignUp = (props) => {
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2}> 
         <Grid item xs={12} sm={6}>
           <TextField
             variant="standard"

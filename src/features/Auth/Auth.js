@@ -1,13 +1,34 @@
-import { useState } from "react";
-import { Box, Grid, Paper, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Grid, Paper, Typography, Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import { useSelector } from "react-redux";
+
 import Login from "./Login";
 import SignUp from "./SignUp";
 
-const Layout = () => {
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+const Auth = () => {
+  const authError = useSelector((state) => state.auth.error);
   const [showSignUp, setShowSignUp] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleSignUp = () => {
     setShowSignUp((prevshowSignUp) => !prevshowSignUp);
+  };
+
+  const handleSnackClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
@@ -50,10 +71,38 @@ const Layout = () => {
           >
             proTracker
           </Typography>
+          {authError && (
+            <>
+              <Snackbar
+                open={open}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                anchorOrigin={{
+                  horizontal: "right",
+                  vertical: "top",
+                }}
+                sx={{
+                  my: "10%",
+                  mx: "3%",
+                  textAlign: "center",
+                }}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="error"
+                  sx={{
+                    width: "100%",
+                  }}
+                >
+                  {authError}
+                </Alert>
+              </Snackbar>
+            </>
+          )}
           {showSignUp ? (
-            <SignUp showLogin={handleSignUp} />
+            <SignUp showLogin={handleSignUp} showSnack={handleSnackClick} />
           ) : (
-            <Login showSignUpPage={handleSignUp} />
+            <Login showSignUpPage={handleSignUp} showSnack={handleSnackClick} />
           )}
         </Box>
       </Grid>
@@ -61,4 +110,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default Auth;

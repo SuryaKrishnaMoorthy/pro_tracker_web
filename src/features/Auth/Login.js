@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   Button,
@@ -45,6 +45,7 @@ const Login = (props) => {
     event.preventDefault();
     const { email, password } = values;
     dispatch(loginUser({ email, password }));
+    props.showSnack();
   };
 
   return (

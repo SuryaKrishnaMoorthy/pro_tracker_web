@@ -4,7 +4,6 @@ import { signUpUser, loginUser } from "./authThunks";
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    token: "",
     error: "",
     loading: false,
     loggedIn: false,
@@ -23,7 +22,7 @@ const authSlice = createSlice({
     },
     [signUpUser.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.error.error;
+      state.error = action.payload.error;
       state.loggedIn = false;
     },
     [loginUser.pending]: (state, action) => {
@@ -38,8 +37,8 @@ const authSlice = createSlice({
     },
     [loginUser.rejected]: (state, action) => {
       state.loading = false;
-      state.error = "";
-      state.loggedIn = true;
+      state.error = action.payload.error;
+      state.loggedIn = false;
     },
   },
 });
