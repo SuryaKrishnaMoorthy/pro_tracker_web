@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   TextField,
@@ -20,6 +21,9 @@ import { loginUser } from "./authThunks";
 
 const Login = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { first_name, last_name } = useSelector((state) => state.user);
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -41,11 +45,15 @@ const Login = (props) => {
     event.preventDefault();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = values;
     dispatch(loginUser({ email, password }));
     props.showSnack();
+
+    if (first_name) {
+      navigate("/tasks", { state: { first_name, last_name } });
+    }
   };
 
   return (

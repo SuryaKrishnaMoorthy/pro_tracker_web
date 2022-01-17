@@ -23,7 +23,7 @@ export const loginUser = createAsyncThunk(
   async (body, { dispatch, rejectWithValue }) => {
     try {
       await login(body);
-      dispatch(getUser());
+      return dispatch(getUser());
     } catch (error) {
       if (!error.response) {
         // dispatch an error, so update state
