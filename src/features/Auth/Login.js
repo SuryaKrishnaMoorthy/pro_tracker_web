@@ -22,7 +22,6 @@ import { loginUser } from "./authThunks";
 const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { first_name, last_name } = useSelector((state) => state.user);
 
   const [values, setValues] = useState({
     email: "",
@@ -50,10 +49,7 @@ const Login = (props) => {
     const { email, password } = values;
     dispatch(loginUser({ email, password }));
     props.showSnack();
-
-    if (first_name) {
-      navigate("/tasks", { state: { first_name, last_name } });
-    }
+    navigate("/tasks");
   };
 
   return (
@@ -69,6 +65,7 @@ const Login = (props) => {
         autoFocus
         variant="standard"
         onChange={handleChange}
+        sx={{ color: "#191654" }}
       />
       <FormControl
         variant="standard"
@@ -103,12 +100,21 @@ const Login = (props) => {
         label="Remember me"
         sx={{ mt: 2 }}
       />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2, backgroundColor: "rgb(129,206, 175)" }}
+      >
         Sign In
       </Button>
       <Grid container>
         <Grid item xs>
-          <Link href="#" variant="body2" sx={{ textDecoration: "none" }}>
+          <Link
+            href="#"
+            variant="body2"
+            sx={{ textDecoration: "none", color: "#191654" }}
+          >
             Forgot password?
           </Link>
         </Grid>
@@ -116,7 +122,7 @@ const Login = (props) => {
           <Link
             href="#"
             variant="body2"
-            sx={{ textDecoration: "none" }}
+            sx={{ textDecoration: "none", color: "#191654" }}
             onClick={props.showSignUpPage}
           >
             Don't have an account? Sign Up

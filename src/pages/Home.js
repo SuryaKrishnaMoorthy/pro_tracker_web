@@ -1,13 +1,14 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../features/User/userThunk";
 
 const Home = () => {
-  const location = useLocation();
-  return (
-    <div>
-      Home: Welcome {`${location.state.first_name} ${location.state.last_name}`}
-    </div>
-  );
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(getUser()), [dispatch]);
+
+  const { first_name, last_name } = useSelector((state) => state.user);
+
+  return <div>Home: Welcome {`${first_name} ${last_name}`}</div>;
 };
 
 export default Home;

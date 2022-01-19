@@ -62,7 +62,7 @@ const SignUp = (props) => {
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ mt: 4 }}>
-      <Grid container spacing={2}> 
+      <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
             variant="standard"
@@ -96,7 +96,6 @@ const SignUp = (props) => {
             fullWidth
             id="zipCode"
             label="Zip Code"
-            autoFocus
             onChange={handleChange}
           />
         </Grid>
@@ -145,7 +144,12 @@ const SignUp = (props) => {
           </FormControl>
         </Grid>
       </Grid>
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2, backgroundColor: "rgb(129,206, 175)" }}
+      >
         Sign Up
       </Button>
       <Grid container justifyContent="flex-end">
@@ -153,7 +157,7 @@ const SignUp = (props) => {
           <Link
             href="#"
             variant="body2"
-            sx={{ textDecoration: "none" }}
+            sx={{ textDecoration: "none", color: "#191654" }}
             onClick={props.showLogin}
           >
             Already have an account? Sign in

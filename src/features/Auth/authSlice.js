@@ -8,7 +8,11 @@ const authSlice = createSlice({
     loading: false,
     loggedIn: false,
   },
-  reducers: {},
+  reducers: {
+    logout(state, action) {
+      state.loggedIn = false;
+    },
+  },
   extraReducers: {
     [signUpUser.pending]: (state, action) => {
       state.loading = true;
@@ -43,6 +47,6 @@ const authSlice = createSlice({
   },
 });
 
-const { reducer } = authSlice;
-
+const { reducer, actions } = authSlice;
+export const { logout } = actions;
 export default reducer;

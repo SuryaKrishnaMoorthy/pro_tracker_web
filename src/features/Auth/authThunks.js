@@ -1,13 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { signUp, login } from "./authService";
-import { getUser } from "../User/userThunk";
+// import { getUser } from "../User/userThunk";
 
 export const signUpUser = createAsyncThunk(
   "auth/signUpUser",
   async (body, { dispatch, rejectWithValue }) => {
     try {
       await signUp(body);
-      dispatch(getUser());
+      // dispatch(getUser());
     } catch (error) {
       if (!error.response) {
         // dispatch an error, so update state
@@ -23,7 +23,7 @@ export const loginUser = createAsyncThunk(
   async (body, { dispatch, rejectWithValue }) => {
     try {
       await login(body);
-      return dispatch(getUser());
+      // return dispatch(getUser());
     } catch (error) {
       if (!error.response) {
         // dispatch an error, so update state
