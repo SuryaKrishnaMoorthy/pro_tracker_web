@@ -10,7 +10,7 @@ function App() {
   
   return (
     <>
-      {loggedIn && <Header />}
+      {<Header />}
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/tasks" element={<Home />} />

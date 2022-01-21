@@ -22,6 +22,7 @@ import { loginUser } from "./authThunks";
 const Login = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loggedIn } = useSelector((state) => state.auth);
 
   const [values, setValues] = useState({
     email: "",
@@ -47,7 +48,7 @@ const Login = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { email, password } = values;
-    dispatch(loginUser({ email, password }));
+    await dispatch(loginUser({ email, password }));
     props.showSnack();
     navigate("/tasks");
   };
